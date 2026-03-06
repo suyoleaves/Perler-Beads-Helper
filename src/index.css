@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f0f7ff;
+  --color-primary-100: #dfeeff;
+  --color-primary-200: #b8ddff;
+  --color-primary-300: #79c2ff;
+  --color-primary-400: #32a3ff;
+  --color-primary-500: #0084f2;
+  --color-primary-600: #0068cf;
+  --color-primary-700: #0053a7;
+  --color-primary-800: #00478a;
+  --color-primary-900: #063c72;
+  --color-primary-950: #04264b;
+
+  --color-accent-400: #fb923c;
+  --color-accent-500: #f97316;
+  --color-accent-600: #ea580c;
+}
+
+body {
+  @apply bg-gray-50 text-gray-800 antialiased;
+  font-family: "Inter", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+/* Pixel-perfect canvas rendering at all zoom levels */
+.pixel-canvas,
+canvas {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* 4-layer canvas stack container */
+.canvas-container {
+  /* Prevent iOS/Android overscroll bounce */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  /* Prevent browser default touch gestures (zoom, scroll) */
+  touch-action: none;
+  /* Prevent text selection while dragging */
+  user-select: none;
+  -webkit-user-select: none;
+  /* All child canvases stack on top of each other */
+  position: relative;
+}
+
+.canvas-container canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Sliders: larger hit area on touch devices */
+@media (pointer: coarse) {
+  input[type="range"] {
+    height: 8px;
+    cursor: pointer;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    width: 22px;
+    height: 22px;
+  }
+  button {
+    min-height: 36px;
+  }
+}
